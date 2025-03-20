@@ -1,47 +1,45 @@
 # Compiler and flags
-CXX		 = g++
+CXX = g++
 CXXFLAGS = -Wall -std=c++17 -g
 
-# Main program
-MAIN_SRCS = main.cpp evaluator.cpp doubly_linked_list.cpp vector_sorter.cpp
-MAIN_OBJS = $(MAIN_SRCS:.cpp=.o)
-
-# Test executables
+# Source files
+SRCS = main.cpp evaluator.cpp doubly_linked_list.cpp vector_sorter.cpp
 TEST_EVAL_SRCS = test_evaluator.cpp evaluator.cpp doubly_linked_list.cpp vector_sorter.cpp
-TEST_EVAL_OBJS = $(TEST_EVAL_SRCS:.cpp=.o)
-
 TEST_SORT_SRCS = test_sorting.cpp evaluator.cpp doubly_linked_list.cpp vector_sorter.cpp
-TEST_SORT_OBJS = $(TEST_SORT_SRCS:.cpp=.o)
 
-# Default target builds everything
-all: main test_evaluator test_sorting
+# Executables
+MAIN = main
+TEST_EVAL = test_evaluator
+TEST_SORT = test_sorting
 
-# Build main executable
-main: $(MAIN_OBJS)
-	$(CXX) $(CXXFLAGS) -o main $(MAIN_OBJS)
+all: compile run clean
 
-# Build test executables
-test_evaluator: $(TEST_EVAL_OBJS)
-	$(CXX) $(CXXFLAGS) -o test_evaluator $(TEST_EVAL_OBJS)
+compile: $(MAIN) $(TEST_EVAL) $(TEST_SORT)
 
-test_sorting: $(TEST_SORT_OBJS)
-	$(CXX) $(CXXFLAGS) -o test_sorting $(TEST_SORT_OBJS)
+$(MAIN): $(SRCS)
+	@$(CXX) $(CXXFLAGS) $(SRCS) -o $(MAIN)
 
-# Run the main executable
-run: main
-	./main
+$(TEST_EVAL): $(TEST_EVAL_SRCS)
+	@$(CXX) $(CXXFLAGS) $(TEST_EVAL_SRCS) -o $(TEST_EVAL)
 
-# Run tests
-test: test_evaluator test_sorting
-	./test_evaluator
-	./test_sorting
+$(TEST_SORT): $(TEST_SORT_SRCS)
+	@$(CXX) $(CXXFLAGS) $(TEST_SORT_SRCS) -o $(TEST_SORT)
 
-# Pattern rule to compile .cpp files to .o files
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+run:
+	@./$(MAIN)
 
-# Clean up object files and executables
 clean:
-	rm -f *.o main test_evaluator test_sorting
+	@rm -f $(MAIN) $(TEST_EVAL) $(TEST_SORT)
 
-.PHONY: all run test clean
+test: test_compile test_run test_clean
+
+test_compile: $(TEST_EVAL) $(TEST_SORT)
+
+test_run:
+	@./$(TEST_EVAL)
+	@./$(TEST_SORT)
+
+test_clean:
+	@rm -f $(TEST_EVAL) (TEST_SORT)
+
+.PHONY: all compile run clean test test_compile test_run test_clean
