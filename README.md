@@ -1,6 +1,6 @@
 # Sorting-Complexity-Project
 
-Class: CPSC 223
+Class: CPSC 223  
 Authors: Cooper Braun, Abby Fewel, Ayden Humphries, Navin Kunakornvanich
 
 ## Testing Sorting
