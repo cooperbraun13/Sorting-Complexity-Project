@@ -11,5 +11,7 @@ class VectorSorter {
         void merge(std::vector<int>& nums, int left, int mid, int right);
         void merge_sort_helper(std::vector<int>& nums, int left, int right);
         void quick_sort_helper(std::vector<int>& nums, int low, int high);
-    };
+        int pivoting(std::vector<int>& nums, int low, int high);
+
+};
 #endif

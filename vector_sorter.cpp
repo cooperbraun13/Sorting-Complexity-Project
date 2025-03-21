@@ -41,3 +41,37 @@ void VectorSorter::merge(std::vector<int>& nums, int left, int mid, int right) {
         k++;
     }
 }
+
+void VectorSorter::quick_sort(std::vector<int>& nums) {
+    // base case:
+    if (nums.size() <= 1) { // if the length is less than or equal to 1 then return
+        return;
+    } 
+    quick_sort_helper(nums, 0, nums.size()-1); // otherwise, call helper with vector, low (0), and high (length)
+}
+
+void VectorSorter::quick_sort_helper(std::vector<int>& nums, int low, int high) {
+    if (low < high) { // if the beginning is less than ends
+        int pivot_index = pivoting(nums, low, high); // then set the index
+        quick_sort_helper(nums, low, pivot_index-1); // call the helper with nums, the first num, and the pivot - 1
+        quick_sort_helper(nums, pivot_index+1, high); // call the helper with nums, the pivot + 1, and the last num
+    }
+}
+
+int VectorSorter::pivoting(std::vector<int>&nums, int low, int high) {
+    int pivot = nums[low]; // the first value is selected as the pivot
+    int i = low; // set a value to use as the first value
+    int j = high; // set a value to use as the last value
+    while(i < j) { // while low is less than high
+        while (nums[i] <= pivot && i < high) { // while the lowest num is less than or equal to pivot and less than high
+            i++; // add one to the low order variable
+        } while (nums[j] > pivot) { // while highest num is greater than pivot
+            j--; // take away one from the high order variable
+        } if (i < j) { // if the low is less than high
+            std::swap(nums[i], nums[j]); // swap them
+        }
+    }
+    std::swap(nums[low], nums[j]); // swap the first value and the last value after pivot is selected
+    std::cout << nums[j] << " ";
+    return j;
+}
