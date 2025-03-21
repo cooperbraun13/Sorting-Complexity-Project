@@ -50,6 +50,28 @@ bool vector_test_quick_sort() {
     return true;
 }
 
+bool vector_test_insertion_sort() {
+    // test for an empty vector, a length of one, and a length of many nums
+    // set up
+    VectorSorter sorter;
+    std::vector<int> empty;
+    std::vector<int> single = {2};
+    std::vector<int> nums = {8, 4, 1, 2, 5};
+
+    // execution
+    sorter.insertion_sort(empty);
+    sorter.insertion_sort(single);
+    sorter.insertion_sort(nums);
+
+    // validation
+    assert(empty.empty());
+    assert(single.size() == 1 && single[0] == 2);
+    assert(std::is_sorted(nums.begin(), nums.end()));
+
+    // clean up
+    return true;
+}
+
 int main() {
     std::cout << "Starting Tests" << std::endl;
 
@@ -59,4 +81,7 @@ int main() {
     std::cout << "\tPivot order: ";
     std::string vec_result_2 = vector_test_quick_sort() ? "Passed" : "Failed";
     std::cout << "\nQuick sort: " << vec_result_2 << std::endl;
+
+    std::string vec_result_3 = vector_test_insertion_sort() ? "Passed" : "Failed";
+    std::cout << "Insertion sort: " << vec_result_3 << std::endl;
 }

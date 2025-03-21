@@ -75,3 +75,16 @@ int VectorSorter::pivoting(std::vector<int>&nums, int low, int high) {
     std::cout << nums[j] << " ";
     return j;
 }
+
+void VectorSorter::insertion_sort(std::vector<int>& nums){ 
+    int n = nums.size(); // n is the length of nums
+    for (int i = 1; i < n; ++i) { // up until the length of nums
+        int key = nums[i]; // the key is the value at nums[i]
+        int j = i - 1; // j is the index of values at i
+        while (j >= 0 && nums[j] > key) { // while j is less than the key value
+            nums[j + 1] = nums[j]; // set the next index to be j
+            --j; // take 1 away from j
+        }
+        nums[j + 1] = key; // i is the key
+    }
+}
