@@ -1,14 +1,17 @@
 #ifndef EVALUATOR_HPP
 #define EVALUATOR_HPP
 #include <vector>
+#include "doubly_linked_list.cpp"
 
 class Evaluator {
 public:
-std::vector <std::vector<int>> eval_vec;
-
+std::vector <std::vector<int>> eval_vec_vec;
+std::vector <DoublyLinkedList()> eval_dll_vec;
 void ingest();
-
-private:
+void merge_compare(); 
+void quick_compare(); 
+void insert_compare(); 
+void evaluate(); 
 
 };
 
