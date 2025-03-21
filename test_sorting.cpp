@@ -6,12 +6,37 @@
 
 bool DLL_test_merge_sort() {
     // Setup
+    DoublyLinkedList empty_list, single_element, unsorted_list;
+
+    single_element.push_back(42);
+
+    unsorted_list.push_back(30);
+    unsorted_list.push_back(10);
+    unsorted_list.push_back(50);
+    unsorted_list.push_back(20);
+    unsorted_list.push_back(40);
+    unsorted_list.push_back(60);
 
     // Execution
+    empty_list.merge_sort();
+    single_element.merge_sort();
+    unsorted_list.merge_sort();
 
     // Validation
+    assert(empty_list.is_empty());
+
+    assert(single_element.size() == 1);
+    assert(single_element.at(0) == 42);
+
+    assert(unsorted_list.at(0) == 10);
+    assert(unsorted_list.at(1) == 20);
+    assert(unsorted_list.at(2) == 30);
+    assert(unsorted_list.at(3) == 40);
+    assert(unsorted_list.at(4) == 50);
+    assert(unsorted_list.at(5) == 60);
 
     // Clean up
+    return true;
 }
 
 bool DLL_test_merge() {
@@ -58,7 +83,7 @@ bool DLL_test_merge() {
     assert(result1->value == 5);
 
     // Non-empty and empty
-    DLLNode* result2 = non_empty_list.merge(non_empty_list.get_head(), empty_list.get_head())
+    DLLNode* result2 = non_empty_list.merge(non_empty_list.get_head(), empty_list.get_head());
     assert(result2 != nullptr);
     assert(result2->value == 5);
 
@@ -69,20 +94,85 @@ bool DLL_test_merge() {
 
 bool DLL_test_quick_sort() {
     // Setup
+    DoublyLinkedList empty_list, single_element, unsorted_list;
+
+    single_element.push_back(42);
+
+    unsorted_list.push_back(30);
+    unsorted_list.push_back(10);
+    unsorted_list.push_back(50);
+    unsorted_list.push_back(20);
+    unsorted_list.push_back(40);
+    unsorted_list.push_back(60);
 
     // Execution
+    empty_list.quick_sort();
+    single_element.quick_sort();
+    unsorted_list.quick_sort();
 
     // Validation
+    assert(empty_list.is_empty());
+
+    assert(single_element.size() == 1);
+    assert(single_element.at(0) == 42);
+
+    assert(unsorted_list.at(0) == 10);
+    assert(unsorted_list.at(1) == 20);
+    assert(unsorted_list.at(2) == 30);
+    assert(unsorted_list.at(3) == 40);
+    assert(unsorted_list.at(4) == 50);
+    assert(unsorted_list.at(5) == 60);
 
     // Clean up
+    return true;
 }
 
 bool DLL_test_insertion_sort() {
     // Setup
+    DoublyLinkedList empty_list, single_element, unsorted_list;
+
+    single_element.push_back(42);
+
+    unsorted_list.push_back(30);
+    unsorted_list.push_back(10);
+    unsorted_list.push_back(50);
+    unsorted_list.push_back(20);
+    unsorted_list.push_back(40);
+    unsorted_list.push_back(60);
 
     // Execution
+    empty_list.insertion_sort();
+    single_element.insertion_sort();
+    unsorted_list.insertion_sort();
 
     // Validation
+    assert(empty_list.is_empty());
+
+    assert(single_element.size() == 1);
+    assert(single_element.at(0) == 42);
+
+    assert(unsorted_list.at(0) == 10);
+    assert(unsorted_list.at(1) == 20);
+    assert(unsorted_list.at(2) == 30);
+    assert(unsorted_list.at(3) == 40);
+    assert(unsorted_list.at(4) == 50);
+    assert(unsorted_list.at(5) == 60);
 
     // Clean up
+    return true;
+}
+
+int main() {
+    std::cout << "Starting Doubly Linked List Tests" << std::endl;
+    
+    std::cout << "Merge Sort: " 
+              << (DLL_test_merge_sort() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Merge: " 
+              << (DLL_test_merge() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Quick Sort: " 
+              << (DLL_test_quick_sort() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Insertion Sort: " 
+              << (DLL_test_insertion_sort() ? "Passed" : "Failed") << std::endl;
+              
+    return 0;
 }
