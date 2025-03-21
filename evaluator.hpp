@@ -1,7 +1,7 @@
 #ifndef EVALUATOR_HPP
 #define EVALUATOR_HPP
 #include <vector>
-#include "doubly_linked_list.cpp"
+#include "doubly_linked_list.hpp"
 
 class Evaluator {
 public:
