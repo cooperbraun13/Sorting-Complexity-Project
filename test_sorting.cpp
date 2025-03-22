@@ -290,6 +290,16 @@ bool DLL_test_insertion_sort() {
 int main() {
     std::cout << "Starting Doubly Linked List Tests" << std::endl;
     
+    std::cout << "Push back: "
+              << (DLL_test_push_back() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Push front: "
+              << (DLL_test_push_front() ? "Passed" : "Failed") << std::endl;
+    std::cout << "At: "
+              << (DLL_test_at() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Is empty: "
+              << (DLL_test_is_empty() ? "Passed" : "Failed") << std::endl;\
+    std::cout << "Size: "
+              << (DLL_test_size() ? "Passed" : "Failed") << std::endl;
     std::cout << "Merge Sort: " 
               << (DLL_test_merge_sort() ? "Passed" : "Failed") << std::endl;
     std::cout << "Merge: " 
