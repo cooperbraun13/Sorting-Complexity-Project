@@ -92,7 +92,7 @@ int DoublyLinkedList::at(int i) {
 }
 
 bool DoublyLinkedList::is_empty() {
-    // a tad overkill but rather safe than sorry
+    // A tad overkill but rather safe than sorry
     return (head == nullptr && tail == nullptr);
 }
 
@@ -123,4 +123,32 @@ void DoublyLinkedList::print_reverse() {
         iter = iter->prev;
     }
     std::cout << std::endl;
+}
+
+void DoublyLinkedList::merge_sort() {
+
+}
+
+DLLNode* DoublyLinkedList::merge_sort_recursive(DLLNode* start) {
+
+}
+
+DLLNode* DoublyLinkedList::merge(DLLNode* left, DLLNode* right) {
+
+}
+
+void DoublyLinkedList::quick_sort() {
+
+}
+
+DLLNode* DoublyLinkedList::partition(DLLNode* left, DLLNode* right) {
+
+}
+
+void DoublyLinkedList::quick_sort_recursive(DLLNode* left, DLLNode* right) {
+
+}
+
+void DoublyLinkedList::insertion_sort() {
+
 }
