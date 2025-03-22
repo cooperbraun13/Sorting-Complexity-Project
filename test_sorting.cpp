@@ -129,6 +129,7 @@ bool DLL_test_size() {
     return true;
 }
 
+// Recuresively divides the list into halves, sorts each half, and merges them to produce a fully sorted list
 bool DLL_test_merge_sort() {
     // Setup
     DoublyLinkedList empty_list, single_element, unsorted_list;
@@ -164,6 +165,7 @@ bool DLL_test_merge_sort() {
     return true;
 }
 
+// Validates that merging two ordered lists results in a combined list that maintains sorted order
 bool DLL_test_merge() {
     // Setup
     DoublyLinkedList list1, list2;
@@ -217,6 +219,7 @@ bool DLL_test_merge() {
     
 }
 
+// Selects a pivot (the first element in our case), partitions the list around the pivot, and recursively sorts the partitions
 bool DLL_test_quick_sort() {
     // Setup
     DoublyLinkedList empty_list, single_element, unsorted_list;
@@ -252,6 +255,7 @@ bool DLL_test_quick_sort() {
     return true;
 }
 
+// Builds the sorted list one element at a time by inserting elements into a sublist of already sorted elements
 bool DLL_test_insertion_sort() {
     // Setup
     DoublyLinkedList empty_list, single_element, unsorted_list;
