@@ -29,10 +29,10 @@ void Evaluator::ingest(int amount, int line_num) {
             eval_dll_vec.push_back(DoublyLinkedList());
 
             for (char ch : line) {  
-                if (ch != ' ' && std::isdigit(ch)) {  // Ignore spaces & check digits
+                if (ch != ' ') {  // Ignore spaces
                     int num = ch - '0';  // Convert char to int
 
-                    if (eval_vec_vec[vec_count].size() == 4) {  
+                    if (eval_vec_vec[vec_count].size() == amount) {  
                         eval_vec_vec.push_back(std::vector<int>());
                         eval_dll_vec.push_back(DoublyLinkedList());
                         vec_count++;

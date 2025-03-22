@@ -15,10 +15,10 @@ bool test_evaluator_ingest() {
     Evaluator eval4;  // line 2, 100
 
     // Execution
-    eval1.ingest(100, 1);  // Test for the first line
-    eval2.ingest(1000, 6); // Test for the next size of numbers first line
-    eval3.ingest(10000, 11); // Test for the next size of numbers
-    eval4.ingest(100, 2); // Test for the second line
+    eval1.ingest(3, 1);  // Test for the first line
+    eval2.ingest(4, 6); // Test for the next size of numbers first line
+    eval3.ingest(5, 11); // Test for the next size of numbers
+    eval4.ingest(3, 2); // Test for the second line
 
     // Validation
     std::cout << "eval1 size: " << eval1.eval_vec_vec.size() << std::endl;
