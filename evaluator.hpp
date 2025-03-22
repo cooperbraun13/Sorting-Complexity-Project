@@ -1,12 +1,14 @@
 #ifndef EVALUATOR_HPP
 #define EVALUATOR_HPP
 #include <vector>
+#include <fstream>
 #include "doubly_linked_list.hpp"
 
 class Evaluator {
 public:
 std::vector <std::vector<int>> eval_vec_vec;
-std::vector <DoublyLinkedList()> eval_dll_vec;
+std::vector <DoublyLinkedList> eval_dll_vec;
+std::ifstream eval_file;
 Evaluator();
 ~Evaluator(); 
 void ingest(int amount, int line);
