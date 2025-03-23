@@ -180,7 +180,7 @@ DLLNode* DoublyLinkedList::merge(DLLNode* left, DLLNode* right) {
     if (left == nullptr) {
         return right;
     }
-    
+
     if (right == nullptr) {
         return left;
     }
@@ -251,5 +251,57 @@ void DoublyLinkedList::quick_sort_helper(DLLNode* start, DLLNode* end) {
 }
 
 void DoublyLinkedList::insertion_sort() {
+    // Base cases, empty list or single element that is already sorted
+    if (is_empty() || size() == 1) {
+        return;
+    }
 
+    // Start with second element (first is already sorted)
+    DLLNode* unsorted = head->next;
+
+    while (unsorted != nullptr) {
+        // Store next unsorted element before maybe moving current
+        DLLNode* next = unsorted->next;
+        DLLNode* current = unsorted;
+
+        // Find each position to insert current in sorted part
+        DLLNode* iter = head;
+        while (iter != current && iter->value <= current->value) {
+            iter = iter->next;
+        }
+
+        // If current already in correct position, just continue
+        if (iter == current) {
+            unsorted = next;
+            continue;
+        }
+
+        // Remove current from position
+        current->prev->next = current->next;
+        if (current->next != nullptr) {
+            current->next->prev = current->prev;
+        }
+        else {
+            tail = current->prev;
+        }
+
+        // Insert current before iter
+        if (iter == head) {
+            // Insert at beginning
+            current->next = head;
+            current->prev = nullptr;
+            head->prev = current;
+            head = current;
+        }
+        else {
+            // Insert in middle
+            current->next = iter;
+            current->prev = iter->prev;
+            iter->prev->next = current;
+            iter->prev = current;
+        }
+
+        // Move to next unsorted element
+        unsorted = next;
+    }
 }
