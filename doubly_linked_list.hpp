@@ -18,10 +18,9 @@ class DoublyLinkedList {
     private:
         DLLNode* head;
         DLLNode* tail;
-        DLLNode* merge_sort_recursive(DLLNode* start);
+        DLLNode* merge_sort_helper(DLLNode* head);
         DLLNode* merge(DLLNode* left, DLLNode* right);
-        DLLNode* partition(DLLNode* left, DLLNode* right);
-        void quick_sort_recursive(DLLNode* left, DLLNode* right);
+        void quick_sort_helper(DLLNode* start, DLLNode* end);
     public:
         DoublyLinkedList();
         ~DoublyLinkedList();
