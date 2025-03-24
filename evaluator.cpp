@@ -29,17 +29,14 @@ void Evaluator::ingest(int amount, int line_num) {
             eval_dll_vec.push_back(DoublyLinkedList());
 
             for (char ch : line) {  
-                if (ch != ' ') {  // Ignore spaces
-                    int num = ch - '0';  // Convert char to int
-
-                    if (eval_vec_vec[vec_count].size() == amount) {  
-                        eval_vec_vec.push_back(std::vector<int>());
-                        eval_dll_vec.push_back(DoublyLinkedList());
-                        vec_count++;
-                    }
-
-                    eval_vec_vec[vec_count].push_back(num);
-                    eval_dll_vec[vec_count].push_back(num);
+                if (ch == ' ') {  // Ignore spaces
+                    eval_vec_vec.push_back(std::vector<int>());
+                    eval_dll_vec.push_back(DoublyLinkedList());
+                } else{
+                int num = ch - '0';  // Convert char to int
+                
+                eval_vec_vec[vec_count].push_back(num);
+                eval_dll_vec[vec_count].push_back(num);
                 }
             }
             break;  // Stop after processing the target line
@@ -49,7 +46,6 @@ void Evaluator::ingest(int amount, int line_num) {
 
     eval_file.close();  // Close the file
 }
-
 
 void Evaluator::merge_compare(){
 
