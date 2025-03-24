@@ -33,7 +33,10 @@ DLLNode::DLLNode(int v, DLLNode* n, DLLNode* p) {
 }
 
 DLLNode::~DLLNode() {
-    delete next;
+    if (next != nullptr) {
+        delete next;
+        next = nullptr;
+    }
 }
 
 DoublyLinkedList::DoublyLinkedList() {

@@ -3,6 +3,11 @@
 #include <stdexcept>
 #include <string>
 #include "doubly_linked_list.hpp"
+#include <vector>
+#include <algorithm>
+#include "vector_sorter.hpp"
+
+// Doubly Linked List Tests
 
 // Add elements to an empty list and then add to a non-empty list
 bool DLL_test_push_back() {
@@ -291,6 +296,74 @@ bool DLL_test_insertion_sort() {
     return true;
 }
 
+// Vector Sorter Tests
+
+bool vector_test_merge_sort() {
+    // test for an empty vector, a length of one, and a length of many nums
+    // set up
+    VectorSorter sorter; // make an instance of the object
+    std::vector<int> empty; 
+    std::vector<int> single = {5};
+    std::vector<int> nums = {3, 6, 2, 1, 4};
+
+    // execution
+    sorter.merge_sort(empty); // call a sort on the empty vector
+    sorter.merge_sort(single); // call a sort of the one-value vector
+    sorter.merge_sort(nums); // call a sort on the vector of numbers
+
+    // validation
+    assert(empty.empty()); // assert that empty is still empty
+    assert(single.size() == 1 && single[0] == 5); // assert that the single value vector is still five and length of one
+    assert(std::is_sorted(nums.begin(), nums.end())); // assert that nums is sorted in ascending order
+
+    // clean up
+    return true;
+}
+
+bool vector_test_quick_sort() {
+    // test for an empty vector, a length of one, and a length of many nums
+    // set up
+    VectorSorter sorter;
+    std::vector<int> empty;
+    std::vector<int> single = {7};
+    std::vector<int> nums = {9, 3, 2, 5, 6};
+
+    // execution
+    sorter.quick_sort(empty);
+    sorter.quick_sort(single);
+    sorter.quick_sort(nums);
+
+    // validation
+    assert(empty.empty());
+    assert(single.size() == 1 && single[0] == 7);
+    assert(std::is_sorted(nums.begin(), nums.end()));
+
+    // clean up
+    return true;
+}
+
+bool vector_test_insertion_sort() {
+    // test for an empty vector, a length of one, and a length of many nums
+    // set up
+    VectorSorter sorter;
+    std::vector<int> empty;
+    std::vector<int> single = {2};
+    std::vector<int> nums = {8, 4, 1, 2, 5};
+
+    // execution
+    sorter.insertion_sort(empty);
+    sorter.insertion_sort(single);
+    sorter.insertion_sort(nums);
+
+    // validation
+    assert(empty.empty());
+    assert(single.size() == 1 && single[0] == 2);
+    assert(std::is_sorted(nums.begin(), nums.end()));
+
+    // clean up
+    return true;
+}
+
 int main() {
     std::cout << "Starting Doubly Linked List Tests" << std::endl;
     
@@ -301,7 +374,7 @@ int main() {
     std::cout << "At: "
               << (DLL_test_at() ? "Passed" : "Failed") << std::endl;
     std::cout << "Is empty: "
-              << (DLL_test_is_empty() ? "Passed" : "Failed") << std::endl;\
+              << (DLL_test_is_empty() ? "Passed" : "Failed") << std::endl;
     std::cout << "Size: "
               << (DLL_test_size() ? "Passed" : "Failed") << std::endl;
     std::cout << "Merge Sort: " 
@@ -312,6 +385,14 @@ int main() {
               << (DLL_test_quick_sort() ? "Passed" : "Failed") << std::endl;
     std::cout << "Insertion Sort: " 
               << (DLL_test_insertion_sort() ? "Passed" : "Failed") << std::endl;
+              
+    std::cout << "\nStarting Vector Sorter Tests" << std::endl;
+    std::cout << "Vector Merge sort: " 
+              << (vector_test_merge_sort() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Vector Quick sort: " 
+              << (vector_test_quick_sort() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Vector Insertion sort: " 
+              << (vector_test_insertion_sort() ? "Passed" : "Failed") << std::endl;
               
     return 0;
 }
