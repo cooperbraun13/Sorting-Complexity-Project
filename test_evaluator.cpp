@@ -83,22 +83,58 @@ return true;
 }
 
 bool test_evaluator_quick_comparison(){
-return true;
+    // setup
+    Evaluator eval;
+    // Evaluator ingest function here
+
+    // execution
+    eval.quick_compare();
+
+    // validation
+    // assert(eval.quick_time_vector() > 0);
+    // assert(eval.quick_time_dll() > 0);
+
+    // clean up
+    return true;
 }
 
 bool test_evaluator_insert_comparison(){
-return true;
+    // setup
+    Evaluator eval;
+
+    // execution
+    eval.insert_compare();
+
+    // validation
+    // assert(eval.insert_time_vector() > 0);
+    // assert(eval.insert_time_dll() > 0);
+
+    // clean up
+    return true;
 }
 
 bool test_evaluator_evaluate(){
-return true;
+    // setup
+    Evaluator eval;
+    // eval.ingest(); when done
+    eval.merge_compare();
+    eval.quick_compare();
+    eval.insert_compare();
+
+    // execution
+    eval.evaluate();
+
+    // validation
+
+    // clean up
+    return true;
 }
 
 int main(){
-test_evaluator_ingest();
-//test_evaluator_merge_comparison();
-//test_evaluator_quick_comparison();
-//test_evaluator_insert_comparison();
-//test_evaluator_evaluate();
-return 0;
+    test_evaluator_ingest();
+    //test_evaluator_merge_comparison();
+    test_evaluator_quick_comparison();
+    test_evaluator_insert_comparison();
+    test_evaluator_evaluate();
+    return 0;
 }
