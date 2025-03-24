@@ -18,6 +18,8 @@ class DoublyLinkedList {
     private:
         DLLNode* head;
         DLLNode* tail;
+        DLLNode* merge_sort_helper(DLLNode* head);
+        void quick_sort_helper(DLLNode* start, DLLNode* end);
     public:
         DoublyLinkedList();
         ~DoublyLinkedList();
@@ -28,6 +30,10 @@ class DoublyLinkedList {
         int size();
         void print();
         void print_reverse();
+        void merge_sort();
+        void quick_sort();
+        void insertion_sort();
+        DLLNode* merge(DLLNode* left, DLLNode* right);
         DLLNode* get_head() { return head; }
         DLLNode* get_tail() { return tail; }
 };
