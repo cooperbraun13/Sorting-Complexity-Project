@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -std=c++17 -g
+CXXFLAGS = -Wall -std=c++11 -g
 
 # Source files
 SRCS = main.cpp evaluator.cpp doubly_linked_list.cpp vector_sorter.cpp
