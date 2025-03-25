@@ -320,6 +320,38 @@ bool vector_test_merge_sort() {
     return true;
 }
 
+bool vector_test_merge() {
+    // test for merging two sorted subarrays, already sorted arrays, single element arrays, empty merges and for unequal size merging
+    // set up: 
+    VectorSorter sorter;
+    std::vector<int> nums = {1, 4, 9, 2, 3, 6};
+
+    // execution: 
+    sorter.merge(nums, 0, 2, 5); // merging [1, 4, 9] and [2, 3, 6]
+
+    // validation:
+    assert(nums == std::vector<int>({1, 2, 3, 4, 6, 9}));
+
+    nums = {1, 2, 3, 4, 5, 6}; // another set up 
+    sorter.merge(nums, 0, 2, 5); // no changing, another execution
+    assert(nums == std::vector<int>({1, 2, 3, 4, 5, 6})); // another validation
+
+    nums = {5, 1}; // another set up
+    sorter.merge(nums, 0, 0, 1); // merging [5] and [1], another execution
+    assert(nums == std::vector<int>({1, 5})); // another validation 
+
+    nums = {}; // another set up
+    sorter.merge(nums, 0, 0, 0); // another execution that doesnt actually execute fully lol because its empty
+    assert(nums.empty()); // another validation
+
+    nums = {1, 10, 2, 5, 8}; // another set up
+    sorter.merge(nums, 0, 1, 4); // merging [1, 10] and [2, 5, 8], another execution
+    assert(nums == std::vector<int>({1, 2, 5, 8, 10})); // another validation
+
+    // clean up
+    return true;
+}
+
 bool vector_test_quick_sort() {
     // test for an empty vector, a length of one, and a length of many nums
     // set up
@@ -385,14 +417,14 @@ int main() {
               << (DLL_test_quick_sort() ? "Passed" : "Failed") << std::endl;
     std::cout << "Insertion Sort: " 
               << (DLL_test_insertion_sort() ? "Passed" : "Failed") << std::endl;
-              
+
     std::cout << "\nStarting Vector Sorter Tests" << std::endl;
     std::cout << "Vector Merge sort: " 
               << (vector_test_merge_sort() ? "Passed" : "Failed") << std::endl;
+    std::cout << "Merge function: " << (vector_test_merge() ? "Passed" : "Failed") << std::endl;
     std::cout << "Vector Quick sort: " 
               << (vector_test_quick_sort() ? "Passed" : "Failed") << std::endl;
     std::cout << "Vector Insertion sort: " 
               << (vector_test_insertion_sort() ? "Passed" : "Failed") << std::endl;
-              
     return 0;
 }
