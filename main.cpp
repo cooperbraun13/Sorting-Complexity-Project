@@ -1,5 +1,6 @@
 #include <iostream>
 #include "doubly_linked_list.hpp"
+#include "evaluator.hpp"
 
 int main() {
     std::cout << "Doubly Linked List Demo" << std::endl;
