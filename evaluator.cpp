@@ -11,41 +11,51 @@ Evaluator::~Evaluator(){
 
 }
 
-void Evaluator::ingest(int amount, int line_num) {
-    std::ifstream eval_file("evaluation_cases.txt");  // Open file safely
-
-    if (!eval_file) {  // Check for file open failure
+void Evaluator::ingest(int line_num) {
+    std::ifstream eval_file("evaluation_cases.txt");
+    if (!eval_file) {
         std::cerr << "Error: Could not open file." << std::endl;
         return;
     }
 
     std::string line;
-    int line_num_start = 0;
+    int current_line = 0;
 
-    while (std::getline(eval_file, line)) {
-        if (line_num_start == line_num) {  
-            int vec_count = 0;
-            eval_vec_vec.push_back(std::vector<int>());
-            eval_dll_vec.push_back(DoublyLinkedList());
-
-            for (char ch : line) {  
-                if (ch == ' ') {  // Ignore spaces
-                    eval_vec_vec.push_back(std::vector<int>());
-                    eval_dll_vec.push_back(DoublyLinkedList());
-                } else{
-                int num = ch - '0';  // Convert char to int
-                
-                eval_vec_vec[vec_count].push_back(num);
-                eval_dll_vec[vec_count].push_back(num);
-                }
-            }
-            break;  // Stop after processing the target line
-        }
-        line_num_start++;
+    // Find the target line
+    while (std::getline(eval_file, line) && current_line < line_num) {
+        current_line++;
     }
 
-    eval_file.close();  // Close the file
+    if (current_line != line_num) {
+        std::cerr << "Error: Line number " << line_num << " out of range." << std::endl;
+        eval_file.close();
+        return;
+    }
+
+    // Clear previous data
+    eval_vec_vec.clear();
+    eval_dll_vec.clear();
+
+    // Start with the first group
+    eval_vec_vec.emplace_back();
+    eval_dll_vec.emplace_back();
+
+    for (char ch : line) {
+        if (ch == ' ') {
+            // Add new group
+            eval_vec_vec.emplace_back();
+            eval_dll_vec.emplace_back();
+        } else if (isdigit(ch)) {
+            // Add to current group
+            int num = ch - '0';
+            eval_vec_vec.back().push_back(num);
+            eval_dll_vec.back().push_back(num);
+        }
+    }
+
+    eval_file.close();
 }
+
 
 void Evaluator::merge_compare(){
 

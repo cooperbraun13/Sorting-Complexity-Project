@@ -45,7 +45,10 @@ DoublyLinkedList::DoublyLinkedList() {
 }
 
 DoublyLinkedList::~DoublyLinkedList() {
-    delete head;
+    if(next != nullptr){
+        delete next;
+        next = nullptr;
+    }
 }
 
 bool DoublyLinkedList::push_back(int v) {
