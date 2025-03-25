@@ -7,8 +7,7 @@
 
 class Evaluator {
     private:
-        std::vector<std::vector<int>> evaluation_cases;
-            
+        std::vector<std::vector<int>> evaluation_cases;    
         std::vector<double> dll_merge_times;
         std::vector<double> vec_merge_times;
         std::vector<double> dll_quick_times;

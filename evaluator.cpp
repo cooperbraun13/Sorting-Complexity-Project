@@ -53,7 +53,37 @@ void Evaluator::ingest(int amount, int line_num) {
 
 
 void Evaluator::merge_compare(){
+    // if vector empty
+    if (eval_dll_vec.empty() || eval_vec_vec.empty()) {
+        std::cout << "Error: No data to sort";
+        return;
+    }
 
+    // run tests for each evaluation case
+    for (const auto& each_case : evaluation_cases) {
+        // create list
+        DoublyLinkedList dll_list;
+        std::vector<int> vec_list;
+        
+        for (int num : each_case) {
+            dll_list.push_back(num);
+            vec_list.push_back(num);
+        }
+        
+        // dll timer
+        auto start = std::chrono::high_resolution_clock::now();
+        dll_list.merge_sort();
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = end - start;
+        dll_quick_times.push_back(elapsed.count());
+        
+        // vector timer
+        start = std::chrono::high_resolution_clock::now();
+        vec_list.merge_sort();
+        end = std::chrono::high_resolution_clock::now();
+        elapsed = end - start;
+        vec_quick_times.push_back(elapsed.count());
+    }
 }
 
 void Evaluator::quick_compare() {
@@ -117,7 +147,7 @@ void Evaluator::insert_compare(){
         
         // vector timer
         start = std::chrono::high_resolution_clock::now();
-        VectorSorter::insertion_sort(vec_list);
+        vec_list.insertion_sort();
         end = std::chrono::high_resolution_clock::now();
         elapsed = end - start;
         vec_insert_times.push_back(elapsed.count());
@@ -125,6 +155,7 @@ void Evaluator::insert_compare(){
 }
 
 void Evaluator::evaluate(){
+    
 }
 
 //ingest() // delimits on whitespace take in a number delimit, for four lines then update. 
