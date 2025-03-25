@@ -29,7 +29,7 @@ run:
 	@./$(MAIN)
 
 clean:
-	@rm -f $(MAIN) $(TEST_EVAL) $(TEST_SORT)
+	@rm -rf $(MAIN) $(TEST_EVAL) $(TEST_SORT) main.dSYM test_sorting.dSYM test_evaluator.dSYM
 
 test: test_compile test_run test_clean
 
