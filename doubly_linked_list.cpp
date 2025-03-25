@@ -154,7 +154,7 @@ DLLNode* DoublyLinkedList::merge_sort_helper(DLLNode* head) {
     // Count total number of nodes in list to find middle
     int count = 0;
     DLLNode* iter = head;
-    while (head != nullptr) {
+    while (iter != nullptr) {
         count++;
         iter = iter->next;
     }
