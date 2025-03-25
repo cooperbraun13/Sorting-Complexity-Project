@@ -32,7 +32,7 @@ DLLNode::DLLNode(int v, DLLNode* n, DLLNode* p) {
 }
 
 DLLNode::~DLLNode() {
-    if (next != nullptr) {
+    if(next != nullptr){
         delete next;
         next = nullptr;
     }
@@ -44,20 +44,10 @@ DoublyLinkedList::DoublyLinkedList() {
 }
 
 DoublyLinkedList::~DoublyLinkedList() {
-    // Iterate through the list safely
-    DLLNode* current = head;
-    while (current != nullptr) {
-        DLLNode* next_node = current->next;  // Save next before deletion
-        
-        // Isolate the current node before deletion
-        current->next = nullptr;
-        current->prev = nullptr;
-        
-        delete current;  // Delete the isolated node
-        current = next_node;  // Move to next node
+    if (head != nullptr) {
+        delete head;
+        head = nullptr;
     }
-    head = nullptr;
-    tail = nullptr;
 }
 
 bool DoublyLinkedList::push_back(int v) {

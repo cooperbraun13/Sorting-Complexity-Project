@@ -11,7 +11,7 @@ std::vector <DoublyLinkedList> eval_dll_vec;
 std::ifstream eval_file;
 Evaluator();
 ~Evaluator(); 
-void ingest(int line);
+void ingest();
 void merge_compare(); 
 void quick_compare(); 
 void insert_compare(); 

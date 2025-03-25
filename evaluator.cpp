@@ -11,45 +11,34 @@ Evaluator::~Evaluator(){
 
 }
 
-void Evaluator::ingest(int line_num) {
+void Evaluator::ingest() {
     std::ifstream eval_file("evaluation_cases.txt");
     if (!eval_file) {
         std::cerr << "Error: Could not open file." << std::endl;
         return;
     }
-
     std::string line;
-    int current_line = 0;
+    std::string str; 
 
-    // Find the target line
-    while (std::getline(eval_file, line) && current_line < line_num) {
-        current_line++;
-    }
-
-    if (current_line != line_num) {
-        std::cerr << "Error: Line number " << line_num << " out of range." << std::endl;
-        eval_file.close();
-        return;
-    }
-
-    // Clear previous data
-    eval_vec_vec.clear();
-    eval_dll_vec.clear();
-
-    // Start with the first group
-    eval_vec_vec.emplace_back();
-    eval_dll_vec.emplace_back();
-
-    for (char ch : line) {
-        if (ch == ' ') {
-            // Add new group
-            eval_vec_vec.emplace_back();
-            eval_dll_vec.emplace_back();
-        } else if (isdigit(ch)) {
-            // Add to current group
-            int num = ch - '0';
-            eval_vec_vec.back().push_back(num);
-            eval_dll_vec.back().push_back(num);
+    // Go through txt file
+    while(std::getline(eval_file, line)){
+        for (char ch : line) {
+            if (ch == ' ') {
+                if(!str.empty()){
+                int assign = std::stoi(str); 
+                str = "";
+                if(eval_vec_vec.size() == 0){
+                    std::vector<int> push_vec; 
+                    DoublyLinkedList dll; 
+                    eval_vec_vec.push_back(push_vec); 
+                    eval_dll_vec.push_back(dll);
+                }
+                eval_vec_vec.back().push_back(assign); 
+                eval_dll_vec.back().push_back(assign); 
+                }
+         }  else {
+            str += ch;
+         }
         }
     }
 
