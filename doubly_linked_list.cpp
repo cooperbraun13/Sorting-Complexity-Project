@@ -32,8 +32,13 @@ DLLNode::DLLNode(int v, DLLNode* n, DLLNode* p) {
 }
 
 DLLNode::~DLLNode() {
+    std::cout << "starting dll node destructor" << std::endl;
     if(next != nullptr){
+        std::cout << "deleting next" << std::endl;
+        std::cout << "node value: " << value << std::endl;
+        std::cout << "node next: " << next << std::endl;
         delete next;
+        std::cout << "next setting to nullptr" << std::endl;
         next = nullptr;
     }
 }
@@ -44,8 +49,11 @@ DoublyLinkedList::DoublyLinkedList() {
 }
 
 DoublyLinkedList::~DoublyLinkedList() {
+    //std::cout << "start doubly linked list deconstructor" << std::endl;
     if (head != nullptr) {
+        //std::cout << "deleting head" << std::endl;
         delete head;
+        //std::cout << "setting head to nullptr" << std::endl;
         head = nullptr;
     }
 }
@@ -56,8 +64,8 @@ bool DoublyLinkedList::push_back(int v) {
     }
     DLLNode* new_node = new DLLNode(v);
     // new_node's prev pointer is set to the current tail
-    new_node->prev = tail;
     tail->next = new_node;
+    new_node->prev = tail;
     tail = new_node;
     return true;
 }
