@@ -7,11 +7,11 @@
 class Evaluator {
 public:
 std::vector <std::vector<int>> eval_vec_vec;
-std::vector <DoublyLinkedList> eval_dll_vec;
+std::vector <DoublyLinkedList*> eval_dll_vec;
 std::ifstream eval_file;
 Evaluator();
 ~Evaluator(); 
-void ingest(int amount, int line);
+void ingest();
 void merge_compare(); 
 void quick_compare(); 
 void insert_compare(); 
