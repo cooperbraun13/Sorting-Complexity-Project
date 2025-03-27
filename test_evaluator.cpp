@@ -19,19 +19,21 @@ bool test_evaluator_ingest() {
     //validation
     assert(eval1.eval_vec_vec[0][0] == 1273);
     std::cout << "first vector correct" << std::endl;
-    assert(eval1.eval_dll_vec[0].get_head()->value == 1273);
+    assert(eval1.eval_dll_vec[0]->get_head()->value == 1273);
     std::cout << "first dll correct" << std::endl;
     assert(eval1.eval_vec_vec[0][1] == 4577);
     std::cout << "second vector correct" << std::endl;
-    assert(eval1.eval_dll_vec[0].get_head()->next->value == 4577);
+    assert(eval1.eval_dll_vec[0]->get_head()->next->value == 4577);
     std::cout << "second dll correct" << std::endl;
     assert(eval1.eval_vec_vec[4][0] == 61407);
-    std::cout << "ten thousands" << std::endl;
-    std::cout << eval1.eval_vec_vec.size() << std::endl;
-    assert(eval1.eval_vec_vec[12][0] == 880635);
+    assert(eval1.eval_dll_vec[4]->get_head()->value == 61407);
+    std::cout << "ten thousands passed" << std::endl;
+    assert(eval1.eval_vec_vec[8][0] == 736525);
+    assert(eval1.eval_dll_vec[8]->get_head()->value == 736525);
     std::cout << "Passed hundred thousands" << std::endl;
 
-    std::cout << eval1.eval_vec_vec[1][0] << std::endl;
+    std::cout << "Thank god and Luke Johnson we passed our tests" << std::endl;
+
 
     return true;
     //cleanup
