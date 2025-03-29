@@ -4,14 +4,14 @@
 
 class VectorSorter {
     public:
-        void merge_sort(std::vector<int>& nums);
-        void quick_sort(std::vector<int>& nums);
-        void insertion_sort(std::vector<int>& nums);
-        void merge(std::vector<int>& nums, int left, int mid, int right);
+        static void merge_sort(std::vector<int>& nums);
+        static void quick_sort(std::vector<int>& nums);
+        static void insertion_sort(std::vector<int>& nums);
+        static void merge(std::vector<int>& nums, int left, int mid, int right);
     private:
-        void merge_sort_helper(std::vector<int>& nums, int left, int right);
-        void quick_sort_helper(std::vector<int>& nums, int low, int high);
-        int pivoting(std::vector<int>& nums, int low, int high);
+        static void merge_sort_helper(std::vector<int>& nums, int left, int right);
+        static void quick_sort_helper(std::vector<int>& nums, int low, int high);
+        static int pivoting(std::vector<int>& nums, int low, int high);
 
 };
 #endif

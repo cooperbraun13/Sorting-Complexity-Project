@@ -32,15 +32,16 @@ DLLNode::DLLNode(int v, DLLNode* n, DLLNode* p) {
 }
 
 DLLNode::~DLLNode() {
-    std::cout << "starting dll node destructor" << std::endl;
-    if(next != nullptr){
-        std::cout << "deleting next" << std::endl;
-        std::cout << "node value: " << value << std::endl;
-        std::cout << "node next: " << next << std::endl;
-        delete next;
-        std::cout << "next setting to nullptr" << std::endl;
-        next = nullptr;
-    }
+    // commented out to reduce
+    // std::cout << "starting dll node destructor" << std::endl;
+    // if(next != nullptr){
+    //     std::cout << "deleting next" << std::endl;
+    //     std::cout << "node value: " << value << std::endl;
+    //     std::cout << "node next: " << next << std::endl;
+    //     delete next;
+    //     std::cout << "next setting to nullptr" << std::endl;
+    //     next = nullptr;
+    // }
 }
 
 DoublyLinkedList::DoublyLinkedList() {
@@ -138,183 +139,168 @@ void DoublyLinkedList::print_reverse() {
     std::cout << std::endl;
 }
 
-// void DoublyLinkedList::merge_sort() {
-//     // Base cases, empty list or single element already sorted
-//     if (is_empty() || size() == 1) {
-//         return;
-//     }
+void DoublyLinkedList::merge_sort() {
+    if (!head || !head->next) return; // Already sorted
+    
+    head = merge_sort_helper(head);
+    
+    // Update tail pointer
+    tail = head;
+    while (tail && tail->next) {
+        tail = tail->next;
+    }
+}
 
-//     head = merge_sort_helper(head);
+// Recursive merge sort helper
+DLLNode* DoublyLinkedList::merge_sort_helper(DLLNode* head) {
+    if (!head || !head->next) return head;
+    
+    // Find middle using slow/fast pointer technique
+    DLLNode* slow = head;
+    DLLNode* fast = head->next;
+    
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    DLLNode* mid = slow->next;
+    slow->next = nullptr; // Split the list
+    if (mid) mid->prev = nullptr;
+    
+    DLLNode* left = merge_sort_helper(head);
+    DLLNode* right = merge_sort_helper(mid);
+    
+    return merge(left, right);
+}
 
-//     // Update tail pointer after sorting
-//     DLLNode* iter = head;
-//     while (iter->next != nullptr) {
-//         iter = iter->next;
-//     }
-//     tail = iter;
-// }
+DLLNode* DoublyLinkedList::merge(DLLNode* left, DLLNode* right) {
+    if (left == nullptr) {
+        return right;
+    }
 
-// // Recursive merge sort helper
-// DLLNode* DoublyLinkedList::merge_sort_helper(DLLNode* head) {
-//     // Base case, empty list or single element
-//     if (head == nullptr || head->next == nullptr) {
-//         return head;
-//     }
+    if (right == nullptr) {
+        return left;
+    }
 
-//     // Count total number of nodes in list to find middle
-//     int count = 0;
-//     DLLNode* iter = head;
-//     while (head != nullptr) {
-//         count++;
-//         iter = iter->next;
-//     }
+    DLLNode* result = nullptr;
 
-//     // Find middle node
-//     int middle = count / 2;
-//     iter = head;
-//     for (int i = 0; i < middle; i++) {
-//         iter = iter->next;
-//     }
+    // Choose smaller value to start with
+    if (left->value <= right->value) {
+        result = left;
+        result->next = merge(left->next, right);
+        if (result->next != nullptr) {
+            result->next->prev = result;
+        }
+    }
+    else {
+        result = right;
+        result->next = merge(left, right->next);
+        if (result->next != nullptr) {
+            result->next->prev = result;
+        }
+    }
 
-//     // Split list into two halves
-//     DLLNode* right = iter->next;
-//     iter->next = nullptr;
-//     if (right != nullptr) {
-//         right->prev = nullptr;
-//     }
+    return result;
+}
 
-//     DLLNode* left_sorted = merge_sort_helper(head);
-//     DLLNode* right_sorted = merge_sort_helper(right);
+void DoublyLinkedList::quick_sort() {
+    // Base case, empty list or single element is already sorted
+    if (is_empty() || size() == 1) {
+        return;
+    }
 
-//     return merge(left_sorted, right_sorted);
-// }
+    quick_sort_helper(head, tail);
+}
 
-// DLLNode* DoublyLinkedList::merge(DLLNode* left, DLLNode* right) {
-//     if (left == nullptr) {
-//         return right;
-//     }
+void DoublyLinkedList::quick_sort_helper(DLLNode* start, DLLNode* end) {
+    // Base case, empty list or list with one element
+    if (start == nullptr || end == nullptr || start == end) {
+        return;
+    }
 
-//     if (right == nullptr) {
-//         return left;
-//     }
+    // Use first element as pivot
+    int pivot_value = start->value;
+    DLLNode* i = start;
 
-//     // Choose smaller value to start with
-//     DLLNode* result;
-//     if (left->value <= right->value) {
-//         result = left;
-//         result->next = merge(left->next, right);
-//         if (result->next != nullptr) {
-//             result->next->prev = result;
-//         }
-//     }
-//     else {
-//         result = right;
-//         result->next = merge(left, right->next);
-//         if (result->next != nullptr) {
-//             result->next->prev = result;
-//         }
-//     }
+    for (DLLNode* j = start->next; j != nullptr; j = j->next) {
+        if (j->value < pivot_value) {
+            // Move i forward and swap values with j
+            i = i->next;
+            std::swap(i->value, j->value);
+        }
 
-//     return result;
-// }
+        // Break if end is reached
+        if (j == end) {
+            break;
+        }
+    }
 
-// void DoublyLinkedList::quick_sort() {
-//     // Base case, empty list or single element is already sorted
-//     if (is_empty() || size() == 1) {
-//         return;
-//     }
+    // Swap pivot with element at correct position
+    std::swap(start->value, i->value);
 
-//     quick_sort_helper(head, tail);
-// }
+    // Sort sublists
+    if (start != i) {
+        quick_sort_helper(start, i->prev);
+    }
 
-// void DoublyLinkedList::quick_sort_helper(DLLNode* start, DLLNode* end) {
-//     // Base case, empty list or list with one element
-//     if (start == nullptr || end == nullptr || start == end) {
-//         return;
-//     }
+    if (i != end) {
+        quick_sort_helper(i->next, end);
+    }
+}
 
-//     // Use first element as pivot
-//     int pivot_value = start->value;
-//     DLLNode* i = start;
+void DoublyLinkedList::insertion_sort() {
+    // Base cases, empty list or single element that is already sorted
+    if (is_empty() || size() == 1) {
+        return;
+    }
 
-//     for (DLLNode* j = start->next; j != nullptr; j = j->next) {
-//         if (j->value < pivot_value) {
-//             // Move i forward and swap values with j
-//             i = i->next;
-//             std::swap(i->value, j->value);
-//         }
+    // Start with second element (first is already sorted)
+    DLLNode* unsorted = head->next;
 
-//         // Break if end is reached
-//         if (j == end) {
-//             break;
-//         }
-//     }
+    while (unsorted != nullptr) {
+        // Store next unsorted element before maybe moving current
+        DLLNode* next = unsorted->next;
+        DLLNode* current = unsorted;
 
-//     // Swap pivot with element at correct position
-//     std::swap(start->value, i->value);
+        // Find each position to insert current in sorted part
+        DLLNode* iter = head;
+        while (iter != current && iter->value <= current->value) {
+            iter = iter->next;
+        }
 
-//     // Sort sublists
-//     if (start != i) {
-//         quick_sort_helper(start, i->prev);
-//     }
+        // If current already in correct position, just continue
+        if (iter == current) {
+            unsorted = next;
+            continue;
+        }
 
-//     if (i != end) {
-//         quick_sort_helper(i->next, end);
-//     }
-// }
+        // Remove current from position
+        current->prev->next = current->next;
+        if (current->next != nullptr) {
+            current->next->prev = current->prev;
+        }
+        else {
+            tail = current->prev;
+        }
 
-// void DoublyLinkedList::insertion_sort() {
-//     // Base cases, empty list or single element that is already sorted
-//     if (is_empty() || size() == 1) {
-//         return;
-//     }
+        // Insert current before iter
+        if (iter == head) {
+            // Insert at beginning
+            current->next = head;
+            current->prev = nullptr;
+            head->prev = current;
+            head = current;
+        }
+        else {
+            // Insert in middle
+            current->next = iter;
+            current->prev = iter->prev;
+            iter->prev->next = current;
+            iter->prev = current;
+        }
 
-//     // Start with second element (first is already sorted)
-//     DLLNode* unsorted = head->next;
-
-//     while (unsorted != nullptr) {
-//         // Store next unsorted element before maybe moving current
-//         DLLNode* next = unsorted->next;
-//         DLLNode* current = unsorted;
-
-//         // Find each position to insert current in sorted part
-//         DLLNode* iter = head;
-//         while (iter != current && iter->value <= current->value) {
-//             iter = iter->next;
-//         }
-
-//         // If current already in correct position, just continue
-//         if (iter == current) {
-//             unsorted = next;
-//             continue;
-//         }
-
-//         // Remove current from position
-//         current->prev->next = current->next;
-//         if (current->next != nullptr) {
-//             current->next->prev = current->prev;
-//         }
-//         else {
-//             tail = current->prev;
-//         }
-
-//         // Insert current before iter
-//         if (iter == head) {
-//             // Insert at beginning
-//             current->next = head;
-//             current->prev = nullptr;
-//             head->prev = current;
-//             head = current;
-//         }
-//         else {
-//             // Insert in middle
-//             current->next = iter;
-//             current->prev = iter->prev;
-//             iter->prev->next = current;
-//             iter->prev = current;
-//         }
-
-//         // Move to next unsorted element
-//         unsorted = next;
-//     }
-// }
+        // Move to next unsorted element
+        unsorted = next;
+    }
+}

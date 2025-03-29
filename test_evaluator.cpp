@@ -2,6 +2,7 @@
 #include <vector>
 #include "evaluator.hpp"
 #include "doubly_linked_list.hpp"
+#include "vector_sorter.hpp"
 #include <cassert>
 
 #include <iostream>
@@ -40,24 +41,96 @@ bool test_evaluator_ingest() {
 }
 
 bool test_evaluator_merge_comparison(){
-//setup
-Evaluator eval1; 
-Evaluator eval2;
-Evaluator eval3; 
+    // setup
+    std::cout << "\nStarting Merge comparison test.\n";
+    Evaluator eval;
 
-//execution
+    eval.ingest();
+    std::cout << "Ingest completed.\n";
 
-//validation
-return true;
-//cleanup
+    DoublyLinkedList* dll_original = eval.eval_dll_vec[0];
+    DoublyLinkedList dll_copy(*dll_original);
+    dll_copy.merge_sort();
+    std::cout << "DLL Merge sort completed.\n";
+
+    std::vector<int> vec_original = eval.eval_vec_vec[0];
+    std::vector<int> vec_copy = vec_original;
+    VectorSorter::merge_sort(vec_copy);
+    std::cout << "Vector merge sort completed.\n";
+
+    // execution
+    eval.merge_compare();
+
+    // validation
+    assert(!eval.dll_merge_times.empty() && !eval.vec_merge_times.empty());
+    std::cout << "- DLL: " << eval.dll_merge_times[0] << " sec\n";
+    std::cout << "- Vector: " << eval.vec_merge_times[0] << " sec\n";
+    std::cout << "Merge comparison test passed.\n";
+    
+    // cleanup
+    return true;
 }
 
-bool test_evaluator_quick_comparison(){
-return true;
+bool test_evaluator_quick_comparison() {
+    // setup
+    std::cout << "\nStarting Quick comparison test.\n";
+    Evaluator eval;
+
+    eval.ingest();
+    std::cout << "Ingest completed.\n";
+
+    DoublyLinkedList* dll_original = eval.eval_dll_vec[0];
+    DoublyLinkedList dll_copy(*dll_original);
+    dll_copy.quick_sort();
+    std::cout << "DLL quick sort completed.\n";
+
+    std::vector<int> vec_original = eval.eval_vec_vec[0];
+    std::vector<int> vec_copy = vec_original;
+    VectorSorter::quick_sort(vec_copy);
+    std::cout << "Vector quick sort completed.\n";
+
+    // execution
+    eval.quick_compare();
+
+    // validation
+    assert(!eval.dll_quick_times.empty() && !eval.dll_quick_times.empty());
+    std::cout << "- DLL: " << eval.dll_quick_times[0] << " sec\n";
+    std::cout << "- Vector: " << eval.dll_quick_times[0] << " sec\n";
+    std::cout << "Insertion comparison test passed.\n";
+    
+    // cleanup
+    return true;
 }
 
-bool test_evaluator_insert_comparison(){
-return true;
+bool test_evaluator_insert_comparison() {
+    // setup
+    std::cout << "\nStarting Insert comparison test.\n";
+    Evaluator eval;
+
+    eval.ingest();
+    std::cout << "Ingest completed.\n";
+
+    DoublyLinkedList* dll_original = eval.eval_dll_vec[0];
+    DoublyLinkedList dll_copy(*dll_original);
+    dll_copy.insertion_sort();
+    std::cout << "DLL insertion sort completed.\n";
+
+    std::vector<int> vec_original = eval.eval_vec_vec[0];
+    std::vector<int> vec_copy = vec_original;
+    VectorSorter::insertion_sort(vec_copy);
+    std::cout << "Vector insertion sort completed.\n";
+
+    // execution
+    eval.insert_compare();
+
+    // validation
+    assert(!eval.dll_insert_times.empty() && !eval.vec_insert_times.empty());
+    std::cout << "- DLL: " << eval.dll_insert_times[0] << " sec\n";
+    std::cout << "- Vector: " << eval.vec_insert_times[0] << " sec\n";
+    std::cout << "Insertion comparison test passed.\n";
+    
+    // cleanup
+    return true;
 }
 
 bool test_evaluator_evaluate(){
@@ -65,10 +138,10 @@ return true;
 }
 
 int main(){
-test_evaluator_ingest();
-//test_evaluator_merge_comparison();
-//test_evaluator_quick_comparison();
-//test_evaluator_insert_comparison();
-//test_evaluator_evaluate();
-return 0;
+    test_evaluator_ingest();
+    test_evaluator_merge_comparison();
+    test_evaluator_quick_comparison();
+    test_evaluator_insert_comparison();
+    //test_evaluator_evaluate();
+    return 0;
 }

@@ -72,7 +72,7 @@ int VectorSorter::pivoting(std::vector<int>&nums, int low, int high) {
         }
     }
     std::swap(nums[low], nums[j]); // swap the first value and the last value after pivot is selected
-    std::cout << nums[j] << " ";
+    // reduce clutter in test for now std::cout << nums[j] << " ";
     return j;
 }
 
