@@ -2,6 +2,7 @@
 #define EVALUATOR_HPP
 #include <vector>
 #include <fstream>
+#include "vector_sorter.hpp"
 #include "doubly_linked_list.hpp"
 
 class Evaluator {

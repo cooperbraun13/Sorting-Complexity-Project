@@ -134,7 +134,21 @@ bool test_evaluator_insert_comparison() {
 }
 
 bool test_evaluator_evaluate(){
-return true;
+    // setup
+    Evaluator eval;
+    // eval.ingest(); when done
+    eval.merge_compare();
+    eval.quick_compare();
+    eval.insert_compare();
+
+    // execution
+    eval.evaluate();
+
+    // validation
+    // no validation needed?...
+
+    // clean up
+    return true;
 }
 
 int main(){

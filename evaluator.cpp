@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <chrono>
 #include "evaluator.hpp"
 #include <string>
 #include <chrono>
@@ -200,8 +202,9 @@ void Evaluator::insert_compare(){
 }
 
 void Evaluator::evaluate(){
-
+    
 }
+
 //ingest() // delimits on whitespace take in a number delimit, for four lines then update. 
 // fill vector with numbers in list, same with doubly linked lists
 // variables vector of doubly linked lists and vector and one for the time that it takes from 
